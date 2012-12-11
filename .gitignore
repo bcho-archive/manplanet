@@ -1,0 +1,10 @@
+*pyc
+*swp
+test*
+*.log
+
+bin/
+lib/
+include/
+data/
+build/

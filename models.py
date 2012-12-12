@@ -36,3 +36,7 @@ class Page(Base):
 
     def __repr__(self):
         return '<Page %s(%s)>' % (self.name, self.section)
+
+    @property
+    def relatives(self):
+        return list(set(self.fromme + self.tome))

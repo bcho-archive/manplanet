@@ -4,8 +4,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy.sql import and_
 
-from config import database_url
+from config import database_url, pr_iterate_times
 from models import Base, Page
+import pr
 
 engine = create_engine(database_url, encoding='utf-8')
 session = scoped_session(sessionmaker(bind=engine, autoflush=True,
@@ -52,3 +53,18 @@ def add_page(name, section, relatives=None):
         session.add(page)
 
     return page
+
+
+def init_rating():
+    pages = session.query(Page).all()
+    pr.init_rank(pages)
+    pr.finish()
+    session.commit()
+
+
+def rating():
+    pages = session.query(Page).all()
+    pr.setup(pages)
+    pr.iterate(pr_iterate_times)
+    pr.finish()
+    session.commit()

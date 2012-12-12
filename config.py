@@ -20,3 +20,6 @@ database_url = 'sqlite:///%s' % (project_db_path)
 log_level = logging.DEBUG
 log_path = os.path.join(project_path, '%s.log' % (project_codename))
 log_format = '%(levelname)s - %(message)s'
+
+#: PageRank settings
+pr_iterate_times = 100

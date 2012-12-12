@@ -23,3 +23,6 @@ log_format = '%(levelname)s - %(message)s'
 
 #: PageRank settings
 pr_iterate_times = 100
+
+#: server settings
+DEBUG = True

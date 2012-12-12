@@ -1,5 +1,7 @@
 #coding: utf-8
 
+from random import randint
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy.sql import and_
@@ -35,8 +37,20 @@ def _get_one(model, cond):
     return ret[0] if ret else None
 
 
+def pages_count():
+    return session.query(Page).count()
+
+
+def get_page_by_id(id):
+    return _get_one(Page, (Page.id == id))
+
+
 def get_page(name, section):
     return _get_one(Page, and_(Page.name == name, Page.section == section))
+
+
+def get_random_page():
+    return get_page_by_id(randint(1, pages_count()))
 
 
 def add_page(name, section, relatives=None):

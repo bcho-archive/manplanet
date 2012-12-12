@@ -1,5 +1,7 @@
 #coding: utf-8
 
+import json
+
 from sqlalchemy import Column, Integer, String, Float
 from sqlalchemy import ForeignKey, Table
 from sqlalchemy.orm import relationship
@@ -40,3 +42,20 @@ class Page(Base):
     @property
     def relatives(self):
         return list(set(self.fromme + self.tome))
+
+    @property
+    def dict(self):
+
+        def _relatives(rel):
+            return [i.id for i in rel]
+
+        return {
+            'fromme': _relatives(self.fromme),
+            'tome': _relatives(self.tome),
+            'name': self.name,
+            'id': self.id,
+            'rating': self.rating,
+        }
+
+    def to_json(self):
+        return json.dumps(self.dict)

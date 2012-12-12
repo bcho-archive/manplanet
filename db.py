@@ -40,10 +40,14 @@ def get_page(name, section):
 
 
 def add_page(name, section, relatives=None):
-    page, found = get_page(name, section), True
+    #: replace the empty section with 3
+    section = section or '3'
+    page = get_page(name, section)
     if not page:
         page = Page(name, section)
         found = False
+    else:
+        found = True
 
     relatives = relatives or []
     for n, s in relatives:

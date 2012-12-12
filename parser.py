@@ -4,7 +4,7 @@ import re
 
 
 def parse_relatives(buf, line_sep=None):
-    pattern = re.compile('([\w\d_\-:]+)\(([\dn])\)')
+    pattern = re.compile('([\w\d_\-:]+)\(([\dn]{0,})\)')
     line_sep = line_sep or '\n'
 
     return pattern.findall(buf.strip())
